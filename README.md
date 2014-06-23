@@ -2,29 +2,40 @@
 
 > like http://www.senchalabs.org/connect/ but for emails
 
+#Status: this is just a skeleton used while I'm writing documentation and designing the public API
+
+
 ## Getting Started
 Install the module with: `npm install connect-mail`
 
 ```javascript
 var connect-mail = require('connect-mail');
-connect-mail.awesome(); // "hello "
+var simplesmtp = require("simplesmtp");
+    
+var smtp = simplesmtp.createServer();
+var app = connect-mail(smtp);
+
+app.use(function(req, res){
+    //accept all mails for me
+    if (req.to === 'me@parro.it'){
+        res.accept();
+    } else { 
+        //rejects all other ones
+        res.reject();
+    }
+
+});
+
+app.listen(25);
+
+
+
 ```
 
-## Documentation
+## Middlewares
 
-#### .awesome(name)
+* (*cm-diskdump*) [https://github.com/connect-mail/cm-diskdump] a connect-mail middleware that save mails to disk.
 
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `Livia`
-
-The 'awesome' method is responsible for showing a name.
-
-How to use this method
-
-```javascript
-connect-mail.awesome('livia'); // "hello livia"
-```
 
 ## Contributing
 

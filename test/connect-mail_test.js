@@ -12,12 +12,12 @@ var chai = require('chai');
 chai.expect();
 chai.should();
 
-var connect-mail = require('../lib/connect-mail.js');
+var cm = require('../lib/connect-mail.js');
 
 describe('connect-mail module', function(){
   describe('#awesome()', function(){
     it('should return a hello', function(){
-      connect-mail.awesome('livia').should.equal("hello livia");
+      cm.awesome('livia').should.equal('hello livia');
     });
   });
 });
