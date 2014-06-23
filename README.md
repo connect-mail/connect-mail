@@ -34,7 +34,7 @@ app.listen(25);
 
 ## Middlewares
 
-* (*cm-diskdump*) [https://github.com/connect-mail/cm-diskdump] a connect-mail middleware that save mails to disk.
+* [*cm-diskdump*](https://github.com/connect-mail/cm-diskdump) a connect-mail middleware that save mails to disk.
 
 
 ## Contributing
