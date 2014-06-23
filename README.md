@@ -9,11 +9,54 @@
 Install the module with: `npm install connect-mail`
 
 ```javascript
-var connect-mail = require('connect-mail');
+var cm = require('connect-mail');
 var simplesmtp = require("simplesmtp");
     
 var smtp = simplesmtp.createServer();
-var app = connect-mail(smtp);
+var app = cm(smtp);
+
+app.use(function(req, res){
+    //accept all mails for me
+    if (req.to === 'me@parro.it'){
+        res.accept();
+    } else { 
+        //rejects all other ones
+        res.reject();
+    }
+
+});
+
+app.listen(25);
+
+
+
+```
+
+###Authorize a user
+
+```javascript
+var cm = require('connect-mail');
+var simplesmtp = require("simplesmtp");
+    
+var smtp = simplesmtp.createServer();
+var app = cm(smtp);
+
+app.use(function authorize(req, res){
+    req.on ('authorizeUser' , function(connection, username, password, callback){
+        if (username === 'you' && password === 'password') {
+            req.user = {
+                name: 'you'
+            };
+            //user authenticate successfully
+            callback(null,true);
+        } else {
+            //authentication failed
+            callback(null,false);
+        }
+    });
+    
+});
+
 
 app.use(function(req, res){
     //accept all mails for me
@@ -35,6 +78,13 @@ app.listen(25);
 ## Middlewares
 
 * [*cm-diskdump*](https://github.com/connect-mail/cm-diskdump) a connect-mail middleware that save mails to disk.
+* [*cm-simpleauth*](https://github.com/connect-mail/cm-simpleauth) a connect-mail middleware that authenticate senders using a [*json users storage*](https://github.com/connect-mail/jsonusersstorage).
+
+## Tools
+
+We use [slush](https://github.com/slushjs) as our scaffolding system. We have a 
+[generator to create cm apps](https://github.com/connect-mail/slush-cmapp) and [one to
+create cm middlewares](https://github.com/connect-mail/slush-cmmid)
 
 
 ## Contributing
