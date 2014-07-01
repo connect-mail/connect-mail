@@ -78,7 +78,7 @@ app.listen(25);
 ## Middlewares
 
 * [*cm-diskdump*](https://github.com/connect-mail/cm-diskdump) a connect-mail middleware that save mails to disk.
-* [*cm-simpleauth*](https://github.com/connect-mail/cm-simpleauth) a connect-mail middleware that authenticate senders using a [*json users storage*](https://github.com/connect-mail/jsonusersstorage).
+* [*cm-diskdump*](https://github.com/connect-mail/cm-diskdump) a connect-mail middleware that authenticate senders using a [*json users storage*](https://github.com/connect-mail/jsonusersstorage).
 
 ## Tools
 
